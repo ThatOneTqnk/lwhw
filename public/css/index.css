@@ -1,0 +1,93 @@
+body {
+    font: 'Open Sans', sans-serif;
+    color: white !important;
+}
+
+h1 {
+    font: 'Open Sans', sans-serif;
+    color: white !important;
+}
+
+h2 {
+    font: 'Open Sans', sans-serif;
+}
+        
+h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    font-weight: 400;
+    margin-bottom: 30px;
+}  
+
+.jumbotron {
+    height: 450px;
+    background-image: url('/img/books2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; 
+}
+
+
+            
+button:hover {
+    color: white !important;
+    opacity: 0.6;
+    text-decoration: none;
+}
+
+button:focus {
+    color: white !important;
+    opacity: 0.6;
+    text-decoration: none;            
+}
+
+button:active {
+    color: white !important;
+    text-decoration: none;
+}
+
+.btn-transparent {
+    background: transparent;
+    color: #F2F2F2;
+    -webkit-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -moz-transition: background .2s ease-in-out, border .2s ease-in-out;
+    -o-transition: background .2s ease-in-out, border .2s ease-in-out;
+    transition: background .2s ease-in-out, border .2s ease-in-out;
+    border: 2px solid rgb(255, 255, 255);
+    font-family: 'Raleway', 'sans-serif';
+}
+
+.navbar {
+    background-color: #1a1b1b;
+}
+
+.navbar-right a {
+    color: #fff;
+}
+
+.navbar .navbar-right a:hover {
+    color: #2daadf;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    background-color: #282a2d;
+    
+}
+
+.navbar-brand {
+    font-family: 'Mukta Mahee', sans-serif;
+    font-size: 28px;
+    color: #fff;
+}
+
+.navbar-brand:hover, .navbar-brand:focus {
+    color: #fff;
+}
+
+.navbar-nav {
+    font-family: 'Mukta Mahee', sans-serif;
+}
+
+.icon-bar {
+    background-color: #fff;
+}

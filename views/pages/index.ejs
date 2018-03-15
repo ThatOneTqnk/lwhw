@@ -6,7 +6,7 @@
     </head>
     <body>
         <% include ../partials/navbar %>
-        <div class="jumbotron text-center" style="margin-top: -4%;">
+        <div class="jumbotron text-center" style="margin-top: -5%;">
             <br><br>
             <h2>Homework Manager</h2> 
             <p><span class="typed"></span></p> 
@@ -14,7 +14,7 @@
             <a href="./help"><button type="button" class="btn btn-transparent waves-effect">Enter</button></a>
         </div>
 
-        <div class="container" style="padding-top: 20px; padding-bottom: 20px; color: black;">
+        <div class="container c1">
                 <div class="row">
                     <div class="col-sm-4">
                         <h3>Note Database</h3>
@@ -33,7 +33,27 @@
                     </div>
                 </div>
         </div>
+        <div class="container c1" ng-app="myApp" ng-controller="myCtrl">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-2">
+                    <ul>
+                        <li ng-repeat="x in student">{{x}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
+        <script>
+            var app = angular.module('myApp', []);
+
+            app.controller('myCtrl', function($scope) {
+                $scope.student = [
+                    'Ree',
+                    'Mee',
+                    'Xee'
+                ];
+            });
+        </script>
 
         <script src="/js/typed.js"></script>
         <script src="/js/typeload.js"></script>

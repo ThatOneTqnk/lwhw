@@ -61,6 +61,12 @@ button:active {
     background-color: #1a1b1b;
 }
 
+.c1 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: black;
+}
+
 .navbar-right a {
     color: #fff;
 }

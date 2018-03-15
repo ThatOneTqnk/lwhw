@@ -33,27 +33,6 @@
                     </div>
                 </div>
         </div>
-        <div class="container c1" ng-app="myApp" ng-controller="myCtrl">
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-2">
-                    <ul>
-                        <li ng-repeat="x in student">{{x}}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            var app = angular.module('myApp', []);
-
-            app.controller('myCtrl', function($scope) {
-                $scope.student = [
-                    'Ree',
-                    'Mee',
-                    'Xee'
-                ];
-            });
-        </script>
 
         <script src="/js/typed.js"></script>
         <script src="/js/typeload.js"></script>

@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/ThatOneTqnk/lwhw#readme",
   "dependencies": {
+    "@angular/animations": "^5.2.9",
+    "@angular/cdk": "^5.2.4",
+    "@angular/material": "^5.2.4",
     "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
     "express": "^4.16.2",

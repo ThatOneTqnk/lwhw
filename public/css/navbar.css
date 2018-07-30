@@ -1,0 +1,71 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(95, 86, 86); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(71, 69, 69); 
+}
+
+::selection {
+    background-color: #CCE2FF;
+    color: rgba(46, 44, 44, 0.87);
+}
+/* Actual CSS */
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar {
+    font-size: 18px;
+    background-color: white;
+    color: black;
+}
+.navbar .lwhw {
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li .opt {
+    color: black;
+    display: block;
+    text-align: center;
+    padding: 21px 16px;
+    text-decoration: none;
+}
+
+
+.navbar .active {
+    border-bottom: 3px solid black; 
+}

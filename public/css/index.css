@@ -1,34 +1,4 @@
-* {
-    padding: 0;
-    margin: 0;
-}
 
-
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 5px;
-}
-::-webkit-scrollbar-track {
-    background: black;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgb(95, 86, 86); 
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgb(71, 69, 69); 
-}
-
-::selection {
-    background-color: #CCE2FF;
-    color: rgba(46, 44, 44, 0.87);
-}
-/* Actual CSS */
-
-body {
-    font-family: 'Roboto', sans-serif;
-}
 
 .jumbotron {
     background-image: url('/img/books2.jpg');
@@ -81,42 +51,11 @@ body {
 }
 
 
-.navbar {
-    font-size: 18px;
-    background-color: white;
-    color: black;
-}
-.navbar .lwhw {
-    text-decoration: none;
-    color: black;
-}
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: white;
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
-}
-
-.navbar li {
-    float: left;
-}
-
-.navbar li .opt {
-    color: black;
-    display: block;
-    text-align: center;
-    padding: 21px 16px;
-    text-decoration: none;
+.heading .spacer {
+    padding-top: 0px !important;
 }
 
 
-.navbar .active {
-    border-bottom: 3px solid black; 
-}
 
 .aside {
     padding: 90px 0;
@@ -177,8 +116,9 @@ body {
 }
 
 .astra .parallax {
+    display: block;
     background-image: url('/img/ep_naturalblack.png');
-    height: 50%;
+    height: 130%;
     background-attachment: fixed;
     background-position: center;
     color: white;
@@ -204,14 +144,6 @@ body {
     padding-top: 50px;
 }
 
-@media screen and (max-width: 950px) and (min-width: 787px) {
-    .astra .subcontent {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        padding: 10px;
-        text-align: left;
-    }
-}
 @media screen and (max-width: 786px) {
     .astra .subtext {
         display: none;

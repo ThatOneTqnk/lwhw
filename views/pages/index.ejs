@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <% include ../partials/header %>
@@ -5,18 +6,13 @@
         <link rel="stylesheet" href="/css/index.css">
     </head>
     <body>
-        <div class="navbar">
-            <ul>
-                <li><h2 style="padding: 14px 16px;"><a class="lwhw" href="./"><em>LWHW</em></a></h2></li>
-                <li style="float: right"><a class="opt" href="./login">Login</a></li>
-            </ul>
-        </div>
+        <% include ../partials/navbar %>
         <div class="jumbotron">
             <div class="aside">
             <h1>LWHW</h1><br>
             <p class="subtitle">All in one solution for academic management. Helps keep your notes organized so you can study smarter, instead of harder.</p>
             <div class="spacer"></div>
-            <a href="./login"><button>REGISTER NOW</button></a>
+            <a href="./register"><button>REGISTER NOW</button></a>
             </div>
         </div>
         <div class="content">
@@ -45,6 +41,7 @@
                         <p class="subtext">Learn the right way. Hours of cramming isn't part of our formula. We strongly believe in studying smarter, not harder. How many wasted hours have you spent reviewing notes and packets, only to realize on the test most of it went to waste? That's why we created LWHW, because we value your time as you should yourself.</p>
                     </div>
                 </div>
+                <div class="spacer"></div>
             </div>
         </div><br>
         <div class="showcase">
@@ -63,8 +60,5 @@
             </div>
         </div>
         <br><br>
-        <div class="footer">
-            <p class="desc">Made by <a href="https://www.github.com/ThatOneTqnk" target=_blank>ThatOneTqnk</a></p>
-        </div>
     </body>
 </html>

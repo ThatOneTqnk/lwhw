@@ -14,7 +14,7 @@ const nodemailer = require('nodemailer');
 //     service: 'gmail',
 //     auth: {
 //         user: "lwhwservice@gmail.com", // service is detected from the username
-//         pass: "REDACTED :)"
+//         pass: "REDACTED"
 //     }
 // });
 
@@ -30,7 +30,6 @@ app.use(bodyparser.urlencoded({
 
 
 app.use(express.static('public'));
-
 
 
 app.set('view engine', 'ejs');
@@ -49,6 +48,10 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
+    if(!(req.body.devCode === 'ULILFOOKINNORMIEXD$')) {
+        res.send({error: 5});
+        return;
+    }
     if(req.body.email && req.body.username && req.body.password && req.body.passwordConf) {
         if(!validator.isEmail(req.body.email)) {
             res.send({error: 4})
@@ -110,5 +113,9 @@ app.post('/register', (req, res) => {
         });
     };
 });
+
+app.use(function (req, res, next) {
+    res.status(404).send("Sorry can't find that!")
+})
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

@@ -6,23 +6,21 @@
     </head>
     <body>
         <% include ../partials/navbar %>
-        <div class="card center-block" style="width: 60%; margin-top: 5%;">
-            <div class="card-body">
-                <h2 class="card-title"><strong>Login</strong></h2>
-                <br><br>
-                <form>
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Username">
+        <div class="card">
+            <div class="container">
+                <h2 style="padding: 0px 7px;"><b>Login</b></h2><br>
+                <form>        
+                    <div class="container">
+                      <label for="uname"><b>Username</b></label>
+                      <input type="text" placeholder="Enter Username" name="uname" required>
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="psw" required>
+                      <button type="submit">Login</button>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="pass" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+                <p class="forgot"><em>Forgot password? Recover <a href="./forgot">here.</a></em></p><br>
+                <p class="forgot"><em>Don't have an account? Register <a href="./register">here.</a></em></p>
             </div>
         </div>
-        <script src="/js/typed.js"></script>
     </body>
 </html>

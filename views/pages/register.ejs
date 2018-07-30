@@ -6,32 +6,27 @@
     </head>
     <body>
         <% include ../partials/navbar %>
-        <div class="card center-block" style="width: 60%; margin-top: 5%;">
-            <div class="card-body">
-                <h2 class="card-title"><strong>Register a new account</strong></h2>
-                <br><br>
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="user" aria-describedby="emailHelp" placeholder="Enter email">
+        <div class="card">
+            <div class="container">
+                <h2 style="padding: 0px 7px;"><b>Register</b></h2><br>
+                <form>        
+                    <div class="container">
+                      <label><b>E-mail</b></label>
+                      <input type="email" placeholder="Enter E-mail" id="user" required>
+                      <label><b>Username</b></label>
+                      <input type="text" placeholder="Enter Username" id="username" required>
+                      <label><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" id="pass" required>
+                      <label><b>Password Confirmation</b></label>
+                      <input type="password" placeholder="Enter Password Confirmation" id="passConf" required>
+                      <label><b>Dev Activation code</b></label>
+                      <input type="text" placeholder="Enter devcode" id="devCode" required>
+                      <button type="submit">Login</button>
                     </div>
-                    <div class="form-group">
-                        <label>Username</label>
-                        <input type="text" class="form-control" id="username" placeholder="Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="pass" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label>Password Confirmation</label>
-                        <input type="password" class="form-control" id="passConf" placeholder="Password Confirmation">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+                <p class="forgot"><em>Already have an account? <a href="./login">Login here.</a></em></p>
             </div>
         </div>
-        <script src="/js/login.js"></script>
-        <script src="/js/typed.js"></script>
+        <script src="/js/register.js"></script>
     </body>
 </html>

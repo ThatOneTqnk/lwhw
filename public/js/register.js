@@ -2,10 +2,12 @@ $(document).ready(() => {
     document.querySelector('form').addEventListener('submit', processLogin);
     function processLogin(e) {
         e.preventDefault();
-        $.post("./register", {email: $('#user').val(), username:  $('#username').val(), password:  $('#pass').val(), passwordConf: $('#passConf').val()})
+        $.post("./register", {email: $('#user').val(), username:  $('#username').val(), password:  $('#pass').val(), passwordConf: $('#passConf').val(), devCode: $('#devCode').val()})
         .done((data) => {
             if(data.error) {
-                if(data.error == 4) {
+                if(data.error == 5) {
+                    alert('Dev code is incorrect.');
+                } else if(data.error == 4) {
                     alert('The e-mail is not valid.');
                 } else if(data.error == 3) {
                     alert('The username is already taken.');

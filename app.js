@@ -1,6 +1,7 @@
 var express = require('express');
 var request = require('request');
 var bodyparser = require('body-parser');
+var config = require('./config.json');
 var app = express();
 var path = require('path');
 var mongoose = require('mongoose');
@@ -48,7 +49,7 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    if(!(req.body.devCode === 'ULILFOOKINNORMIEXD$')) {
+    if(!(req.body.devCode === config.activation_code)) {
         res.send({error: 5});
         return;
     }

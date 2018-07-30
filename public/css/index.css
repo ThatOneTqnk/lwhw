@@ -1,58 +1,291 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(95, 86, 86); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(71, 69, 69); 
+}
+
+::selection {
+    background-color: #CCE2FF;
+    color: rgba(46, 44, 44, 0.87);
+}
+/* Actual CSS */
+
 body {
-    font: 'Open Sans', sans-serif;
-    color: white !important;
+    font-family: 'Roboto', sans-serif;
 }
-
-h1 {
-    font: 'Open Sans', sans-serif;
-    color: white !important;
-}
-
-h2 {
-    font: 'Open Sans', sans-serif;
-}
-        
-h4 {
-    font-size: 19px;
-    line-height: 1.375em;
-    font-weight: 400;
-    margin-bottom: 30px;
-}  
 
 .jumbotron {
-    height: 450px;
     background-image: url('/img/books2.jpg');
+    height: 65%;
+    background-attachment: fixed;
+    background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center; 
+    color: white;
+    text-align: center;
+}
+@media screen and (max-width: 1090px) {
+    .jumbotron {
+        background-image: url('/img/books2.jpg');
+        height: 90%;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        color: white;
+        text-align: center;
+    }
+}
+
+.jumbotron button {
+    background-color: rgb(74, 153, 77); /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 
 
-            
-button:hover {
-    color: white !important;
-    opacity: 0.6;
+.jumbotron .spacer {
+    padding: 25px 0;
+}
+@media screen and (max-width: 1040px) {
+    .jumbotron .spacer {
+        padding: 10px 0;
+    }
+}
+.jumbotron button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+.navbar {
+    font-size: 18px;
+    background-color: white;
+    color: black;
+}
+.navbar .lwhw {
+    text-decoration: none;
+    color: black;
+}
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li .opt {
+    color: black;
+    display: block;
+    text-align: center;
+    padding: 21px 16px;
     text-decoration: none;
 }
 
-button:focus {
-    color: white !important;
-    opacity: 0.6;
-    text-decoration: none;            
+
+.navbar .active {
+    border-bottom: 3px solid black; 
 }
 
-button:active {
-    color: white !important;
+.aside {
+    padding: 90px 0;
+    text-align: left;
+    padding-left: 18px;
+}
+@media screen and (max-width: 767px) {
+    .aside {
+        padding: 50px 0;
+        text-align: left;
+        padding-left: 18px;
+    }
+}
+
+.jumbotron .subtitle {
+    width: 45%;
+    font-size: 18px;
+}
+@media screen and (max-width: 1040px) {
+    .jumbotron .subtitle {
+        width: 85%;
+        font-size: 18px;
+    }
+}
+
+
+.content .spacer {
+    padding: 25px 0;
+}
+
+
+.content .info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px;
+}
+@media screen and (max-width:767px) {
+    .content .info {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+}
+
+.content .grid-item {
+    padding: 20px;
+    text-align: left;
+    grid-area: auto;
+}
+
+.info .supertip {
+    color: rgb(88, 88, 88);
+    line-height: 1.4;
+}
+
+.astra .spacer {
+    padding: 25px 0;
+}
+
+.astra .parallax {
+    background-image: url('/img/ep_naturalblack.png');
+    height: 50%;
+    background-attachment: fixed;
+    background-position: center;
+    color: white;
+    text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+    .astra .parallax {
+        background-image: url('/img/ep_naturalblack.png');
+        height: 75%;
+        background-attachment: fixed;
+        background-position: center;
+        color: white;
+        text-align: center;
+    }
+}
+.astra .subcontent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    text-align: left;
+    padding-left: 20px;
+    padding-top: 50px;
+}
+
+@media screen and (max-width: 950px) and (min-width: 787px) {
+    .astra .subcontent {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 10px;
+        text-align: left;
+    }
+}
+@media screen and (max-width: 786px) {
+    .astra .subtext {
+        display: none;
+    }
+    .astra .subheader {
+        padding-top: 10%;
+    }
+}
+
+
+
+.showcase .spacer {
+    padding: 25px 0;
+}
+
+
+.showcase .info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+}
+@media screen and (max-width:767px) {
+    .showcase .info {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+}
+
+.showcase .grid-item {
+    padding: 20px;
+    text-align: center;
+    grid-area: auto;
+}
+
+.footer {
+    padding-top: 2%;
+    width: 100%;
+    height: 6.5%;
+    background-color: rgb(97, 92, 92);
+    color: white;
+    text-align: left;
+ }
+
+ @media screen and (max-width: 767px) {
+    .footer {
+        padding-top: 4%;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 12%;
+        background-color: rgb(97, 92, 92);
+        color: white;
+        text-align: left;
+     }
+ }
+
+ .footer .desc {
+    padding-left: 1%;
+ }
+
+ .footer a {
     text-decoration: none;
-}
+    color: white;
+ }
+ .footer a:hover {
+    text-decoration: none;
+    color: white;
+    animation-name: fadeDef;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+ }
 
-.btn-transparent {
-    background: transparent;
-    color: #F2F2F2;
-    -webkit-transition: background .2s ease-in-out, border .2s ease-in-out;
-    -moz-transition: background .2s ease-in-out, border .2s ease-in-out;
-    -o-transition: background .2s ease-in-out, border .2s ease-in-out;
-    transition: background .2s ease-in-out, border .2s ease-in-out;
-    border: 2px solid rgb(255, 255, 255);
-    font-family: 'Raleway', 'sans-serif';
+ @keyframes fadeDef {
+    from {color: white;}
+    to {color: rgb(46, 44, 44);}
 }

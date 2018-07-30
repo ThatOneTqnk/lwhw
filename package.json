@@ -18,14 +18,16 @@
   },
   "homepage": "https://github.com/ThatOneTqnk/lwhw#readme",
   "dependencies": {
-    "@angular/animations": "^5.2.9",
-    "@angular/cdk": "^5.2.4",
-    "@angular/material": "^5.2.4",
-    "body-parser": "^1.18.2",
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "mongodb": "^3.0.4",
+    "mongoose": "^5.2.5",
+    "nodemailer": "^4.6.7",
     "request": "^2.83.0",
-    "typescript": "^2.7.2"
+    "uuid": "^3.3.2",
+    "validator": "^10.4.0"
   }
 }

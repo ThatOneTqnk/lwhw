@@ -1,7 +1,12 @@
 var express = require('express');
 var request = require('request');
 var bodyparser = require('body-parser');
-var config = require('./config.json');
+var config;
+try {
+    config = require('./config.json');
+} catch(e) {
+    console.log('Shell alternatives will be accessed.');
+}
 var app = express();
 var path = require('path');
 var mongoose = require('mongoose');

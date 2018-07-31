@@ -5,9 +5,7 @@ const User = require('../models/user.js')
 const mongoose = require('mongoose');
 
 exports.validatePassword = function(password, compare) {
-    return new Promise((resolve, reject) => {
-        resolve(bcrypt.compare(password, compare));
-    });
+    return bcrypt.compareSync(password, compare);
 }
 
 exports.hash = function(password) {
@@ -39,13 +37,29 @@ exports.isVerified = function(incToken) {
     });
 }
 
+
+// Also brings back email-verification status on trip
 exports.authenticate = function(incToken) {
     return new Promise((resolve, reject) => {
         User.findOne({token: incToken}, (err, resp) => {
-            if(resp) resolve(true);
+            let link = "/dashboard/activate"
+            if(resp.active) link = "/dashboard/"
+            if(resp) resolve({
+                active_link: link,
+                state: true,
+                active: resp.active
+            });
             if(err || !resp || (!err && !resp)) {
-                reject(false);
+                reject({state: false});
             }
         });
     });
 }
+
+
+// Simple function to oreturn what route to go to depending on email verification state
+// exports.routeActive = function(bool) {
+//     let state = "/dashboard/activate"
+//     if(bool) state = "/dashboard/"
+//     return state;
+// }

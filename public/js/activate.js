@@ -9,7 +9,7 @@ $(document).ready(() => {
             result = e;
         }
         if(result.response) {
-            snacc('All good boy. Verification, complete.');
+            window.location.replace("/dashboard/");
         } else {
             if(result.error == 101) {
                 snacc('Error in contacting servers.')

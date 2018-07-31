@@ -13,7 +13,7 @@ app.use(async (req, res, next) => {
         } catch(e) {
             isAuth = e;
         }
-        if(isAuth) {
+        if(isAuth.state) {
             next();
         } else {
             res.redirect('/');
@@ -34,7 +34,7 @@ app.get('/', async (req, res) => {
         res.redirect('/dashboard/activate');
         return;
     }
-    res.send('Will add shtuff here soon :). For now you are logged in.')
+    res.render('pages/mainDash')
 });
 
 app.get('/activate', async (req, res) => {

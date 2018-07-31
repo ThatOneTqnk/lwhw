@@ -10,6 +10,7 @@ var uuidv4 = require('uuid/v4');
 var bcryptUtil = require('./util/bcrypt.js');
 var cookieParser = require('cookie-parser');
 var validator = require('validator');
+var softAuth = require('./auth/softAuth.js');
 
 const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
@@ -41,11 +42,11 @@ app.get('/', (req, res) => {
     res.render('pages/index');
 });
 
-app.get('/login', (req, res) => {
+app.get('/login', softAuth, async (req, res) => {
     res.render('pages/login');
 });
 
-app.get('/register', (req, res) => {
+app.get('/register', softAuth, (req, res) => {
     res.render('pages/register');
 });
 
@@ -91,12 +92,7 @@ app.post('/ghost_login', (req, res) => {
         }
         User.findOne({username_lower: credentials.user}, async (err, resp) => {
             if(resp) {
-                let verified = false;
-                try {
-                    verified = await bcryptUtil.validatePassword(credentials.pass, resp.password);
-                } catch(e) {
-                    verified = e;
-                }
+                let verified = bcryptUtil.validatePassword(credentials.pass, resp.password);
                 if(verified) {
                     res.send({token: resp.token, activated: resp.active});
                     return;

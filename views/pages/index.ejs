@@ -6,13 +6,27 @@
         <link rel="stylesheet" href="/css/index.css">
     </head>
     <body>
-        <% include ../partials/navbar %>
+        <!-- primary -->
+        <ul class="nav nav-tabs bg-primary">
+            <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Another link</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
         <div class="jumbotron">
             <div class="aside">
             <h1>LWHW</h1><br>
             <p class="subtitle">All in one solution for academic management. Helps keep your notes organized so you can study smarter, instead of harder.</p>
             <div class="spacer"></div>
-            <a href="./register"><button>REGISTER NOW</button></a>
+            <button class="btn btn-raised btn-primary" style="padding: 15px 15px !important;">REGISTER NOW</button>
             </div>
         </div>
         <div class="content">

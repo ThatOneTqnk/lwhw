@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
     res.render('pages/index');
 });
 
-app.get('/login', softAuth, async (req, res) => {
+app.get('/login', softAuth, (req, res) => {
     res.render('pages/login');
 });
 

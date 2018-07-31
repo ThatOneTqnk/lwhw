@@ -14,6 +14,7 @@ app.use(async (req, res, next) => {
             isAuth = e;
         }
         if(isAuth.state) {
+            req.body.verified = isAuth.active;
             next();
         } else {
             res.redirect('/');
@@ -24,13 +25,7 @@ app.use(async (req, res, next) => {
 });
 
 app.get('/', async (req, res) => {
-    let verified;
-    try {
-        verified = await bcryptUtil.isVerified(req.cookies.auth_token);
-    } catch(e) {
-        verified = e;
-    }
-    if(!verified) {
+    if(!req.body.verified) {
         res.redirect('/dashboard/activate');
         return;
     }
@@ -38,13 +33,7 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/activate', async (req, res) => {
-    let verified;
-    try {
-        verified = await bcryptUtil.isVerified(req.cookies.auth_token);
-    } catch(e) {
-        verified = e;
-    }
-    if(verified) {
+    if(req.body.verified) {
         res.redirect('/dashboard');
         return;
     }

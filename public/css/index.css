@@ -1,5 +1,6 @@
 
 
+
 .jumbotron {
     background-image: url('/img/books2.jpg');
     height: 65%;
@@ -21,8 +22,8 @@
     }
 }
 
-.jumbotron button {
-    background-color: rgb(74, 153, 77); /* Green */
+/* .jumbotron button {
+    background-color: rgb(74, 153, 77); 
     border: none;
     color: white;
     padding: 15px 32px;
@@ -33,9 +34,10 @@
     font-family: 'Roboto', sans-serif;
     margin: 4px 2px;
     cursor: pointer;
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
-}
+} */
+
 
 
 .jumbotron .spacer {

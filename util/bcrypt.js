@@ -43,12 +43,14 @@ exports.authenticate = function(incToken) {
     return new Promise((resolve, reject) => {
         User.findOne({token: incToken}, (err, resp) => {
             let link = "/dashboard/activate"
-            if(resp.active) link = "/dashboard/"
-            if(resp) resolve({
-                active_link: link,
-                state: true,
-                active: resp.active
-            });
+            if(resp) {
+                if(resp.active) link = "/dashboard/"
+                resolve({
+                    active_link: link,
+                    state: true,
+                    active: resp.active
+                });
+            }
             if(err || !resp || (!err && !resp)) {
                 reject({state: false});
             }

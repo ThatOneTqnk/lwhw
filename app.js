@@ -17,7 +17,7 @@ let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: "lwhwservice@gmail.com", // service is detected from the username
-        pass: config.email_pass
+        pass: (config.email_pass || process.env.email_pass)
     }
 });
 
@@ -111,7 +111,7 @@ app.post('/ghost_login', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    if(!(req.body.devCode === config.activation_code)) {
+    if(!(req.body.devCode === (config.activation_code || process.env.activation_code))) {
         res.send({error: 5});
         return;
     }

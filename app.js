@@ -1,7 +1,7 @@
 var express = require('express');
 var request = require('request');
 var bodyparser = require('body-parser');
-var config;
+var config = false;
 try {
     config = require('./config.json');
 } catch(e) {
@@ -17,12 +17,19 @@ var cookieParser = require('cookie-parser');
 var validator = require('validator');
 var softAuth = require('./auth/softAuth.js');
 
+var sensitive;
+if(config) {
+    sensitive = {email_pass: config.email_pass, activation_code: config.activation_code};
+} else {
+    sensitive = {email_pass: process.env.email_pass, activation_code: process.env.activation_code};
+}
+
 const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: "lwhwservice@gmail.com", // service is detected from the username
-        pass: (config.email_pass || process.env.email_pass)
+        pass: sensitive.email_pass
     }
 });
 
@@ -116,7 +123,7 @@ app.post('/ghost_login', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    if(!(req.body.devCode === (config.activation_code || process.env.activation_code))) {
+    if(!(req.body.devCode === sensitive.activation_code)) {
         res.send({error: 5});
         return;
     }

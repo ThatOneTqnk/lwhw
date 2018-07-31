@@ -12,9 +12,9 @@
                 <form>        
                     <div class="container">
                       <label for="uname"><b>Username</b></label>
-                      <input type="text" placeholder="Enter Username" name="uname" required>
+                      <input type="text" placeholder="Enter Username" id="uname" required>
                       <label for="psw"><b>Password</b></label>
-                      <input type="password" placeholder="Enter Password" name="psw" required>
+                      <input type="password" placeholder="Enter Password" id="psw" required>
                       <button type="submit">Login</button>
                     </div>
                 </form>
@@ -22,5 +22,7 @@
                 <p class="forgot"><em>Don't have an account? Register <a href="./register">here.</a></em></p>
             </div>
         </div>
+        <script src="/js/login.js"></script>
+        <% include ../partials/snackbar %>
     </body>
 </html>

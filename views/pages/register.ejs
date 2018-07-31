@@ -1,7 +1,7 @@
 <html>
     <head>
         <% include ../partials/header %>
-        <title>Login</title>
+        <title>Registration</title>
         <link rel="stylesheet" href="/css/login.css">
     </head>
     <body>
@@ -13,7 +13,7 @@
                     <div class="container">
                       <label><b>E-mail</b></label>
                       <input type="email" placeholder="Enter E-mail" id="user" required>
-                      <label><b>Username</b></label>
+                      <label><b>Username (4-20 characters, only numbers, letters, and underscores)</b></label>
                       <input type="text" placeholder="Enter Username" id="username" required>
                       <label><b>Password</b></label>
                       <input type="password" placeholder="Enter Password" id="pass" required>
@@ -21,12 +21,13 @@
                       <input type="password" placeholder="Enter Password Confirmation" id="passConf" required>
                       <label><b>Dev Activation code</b></label>
                       <input type="text" placeholder="Enter devcode" id="devCode" required>
-                      <button type="submit">Login</button>
+                      <button type="submit">Register</button>
                     </div>
                 </form>
                 <p class="forgot"><em>Already have an account? <a href="./login">Login here.</a></em></p>
             </div>
         </div>
         <script src="/js/register.js"></script>
+        <% include ../partials/snackbar %>
     </body>
 </html>

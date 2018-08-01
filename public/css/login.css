@@ -1,5 +1,5 @@
-html{
-    height: 100%;
+/* html {
+    height: 100% !important;
 }
 body {
     background-image: url('/img/darkstudy.png');
@@ -8,9 +8,18 @@ body {
     background-position: center center;   
     font-family: 'Roboto', sans-serif;
     color: black !important;
-    min-height: 100%;
-}
+    min-height: 100% !important;
+} */
 
-.spacer {
-    padding-top: 9%;
-}
+body { 
+    background: url('/img/darkstudy.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+  .spacer {
+      padding-top: 4%;
+  }
+

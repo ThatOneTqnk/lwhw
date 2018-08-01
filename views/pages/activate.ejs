@@ -3,13 +3,32 @@
     <head>
         <% include ../partials/header %>
         <title>Activate Account</title>
-        <link rel="stylesheet" href="/css/activate.css">
+        <link rel="stylesheet" href="/css/login.css">
     </head>
     <body>
         <% include ../partials/navbar %>
-        <p>ok u do good registration but now u must go to email and get activation code<br>put activation code in here</p><br><br>
-        <input type="text" id="activate"><br>
-        <button id="checkCode">submit</button>
+        <div class="spacer"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 offset-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Activate account</h2>
+                            <p>Almost done! Just check your email for a verification code to continue.</p>
+                            <form>
+                                <div class="form-group">
+                                    <label for="activeCode" class="bmd-label-floating">Activation Code</label>
+                                    <input type="text" class="form-control" id="activeCode">
+                                    <span class="bmd-help">Check your e-mail for a code.</span>
+                                </div><br>
+                                <button type="submit" class="btn btn-outline-primary" style="padding-top: 11px 11px;">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
         <script src="../js/activate.js"></script>
         <% include ../partials/snackbar %>
     </body>

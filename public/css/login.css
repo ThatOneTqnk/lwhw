@@ -1,12 +1,16 @@
+html{
+    height: 100%;
+}
 body {
     background-image: url('/img/darkstudy.png');
-    background-size: cover;
+    background-size: cover !important;
     background-repeat: no-repeat;
     background-position: center center;   
     font-family: 'Roboto', sans-serif;
     color: black !important;
+    min-height: 100%;
 }
 
 .spacer {
-    padding-top: 4%;
+    padding-top: 9%;
 }

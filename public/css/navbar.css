@@ -65,7 +65,7 @@ body {
     text-decoration: none;
 }
 
-
-.navbar .active {
-    border-bottom: 3px solid black; 
+.fixLink {
+    padding: 0.5286em .8575em !important;
+    border-bottom: 0 !important;
 }

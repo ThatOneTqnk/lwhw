@@ -7,27 +7,45 @@
     </head>
     <body>
         <% include ../partials/navbar %>
-        <div class="card">
-            <div class="container">
-                <h2 style="padding: 0px 7px;"><b>Register</b></h2><br>
-                <form>        
-                    <div class="container">
-                      <label><b>E-mail</b></label>
-                      <input type="email" placeholder="Enter E-mail" id="user" required>
-                      <label><b>Username (4-20 characters, only numbers, letters, and underscores)</b></label>
-                      <input type="text" placeholder="Enter Username" id="username" required>
-                      <label><b>Password</b></label>
-                      <input type="password" placeholder="Enter Password" id="pass" required>
-                      <label><b>Password Confirmation</b></label>
-                      <input type="password" placeholder="Enter Password Confirmation" id="passConf" required>
-                      <label><b>Dev Activation code</b></label>
-                      <input type="text" placeholder="Enter devcode" id="devCode" required>
-                      <button type="submit">Register</button>
+        <div class="spacer"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 offset-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Register</h2>
+                            <p>Register for an account to use LWHW.</p>
+                            <form>
+                                <div class="form-group">
+                                    <label for="username" class="bmd-label-floating">Username</label>
+                                    <input type="text" class="form-control" id="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="user" class="bmd-label-floating">Email address</label>
+                                    <input type="email" class="form-control" id="user">
+                                    <span class="bmd-help">We'll never share your email with anyone else.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass" class="bmd-label-floating">Password</label>
+                                    <input type="password" class="form-control" id="pass">
+                                </div>
+                                <div class="form-group">
+                                    <label for="passConf" class="bmd-label-floating">Password Confirmation</label>
+                                    <input type="password" class="form-control" id="passConf">
+                                </div>
+                                <div class="form-group">
+                                    <label for="devCode" class="bmd-label-floating">Developer Code</label>
+                                    <input type="text" class="form-control" id="devCode">
+                                    <span class="bmd-help">Site is still in development! You need to ask an admin for code.</span>
+                                </div><br>
+                                <button type="submit" class="btn btn-outline-primary" style="padding-top: 11px 11px;">Submit</button>
+                            </form>
+                        </div>
                     </div>
-                </form>
-                <p class="forgot"><em>Already have an account? <a href="./login">Login here.</a></em></p>
+                </div>
             </div>
         </div>
+        <div class="spacer"></div>
         <script src="/js/register.js"></script>
         <% include ../partials/snackbar %>
     </body>

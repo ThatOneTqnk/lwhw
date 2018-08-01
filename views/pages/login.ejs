@@ -2,27 +2,36 @@
 <html>
     <head>
         <% include ../partials/header %>
-        <title>Login</title>
+        <title>Registration</title>
         <link rel="stylesheet" href="/css/login.css">
     </head>
     <body>
         <% include ../partials/navbar %>
-        <div class="card">
-            <div class="container">
-                <h2 style="padding: 0px 7px;"><b>Login</b></h2><br>
-                <form>        
-                    <div class="container">
-                      <label for="uname"><b>Username</b></label>
-                      <input type="text" placeholder="Enter Username" id="uname" required>
-                      <label for="psw"><b>Password</b></label>
-                      <input type="password" placeholder="Enter Password" id="psw" required>
-                      <button type="submit">Login</button>
+        <div class="spacer"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 offset-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Login</h2>
+                            <p>Login into your account.</p>
+                            <form>
+                                <div class="form-group">
+                                    <label for="username" class="bmd-label-floating">Username</label>
+                                    <input type="text" class="form-control" id="uname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass" class="bmd-label-floating">Password</label>
+                                    <input type="password" class="form-control" id="psw">
+                                </div><br>
+                                <button type="submit" class="btn btn-outline-primary" style="padding-top: 11px 11px;">Login</button>
+                            </form>
+                        </div>
                     </div>
-                </form>
-                <p class="forgot"><em>Forgot password? Recover <a href="./forgot">here.</a></em></p><br>
-                <p class="forgot"><em>Don't have an account? Register <a href="./register">here.</a></em></p>
+                </div>
             </div>
         </div>
+        <div class="spacer"></div>
         <script src="/js/login.js"></script>
         <% include ../partials/snackbar %>
     </body>

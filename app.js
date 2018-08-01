@@ -19,9 +19,9 @@ var softAuth = require('./auth/softAuth.js');
 
 var sensitive;
 if(config) {
-    sensitive = {email_pass: config.email_pass, activation_code: config.activation_code};
+    sensitive = {email_pass: config.email_pass, activation_code: config.activation_code, db_url: config.db_url};
 } else {
-    sensitive = {email_pass: process.env.email_pass, activation_code: process.env.activation_code};
+    sensitive = {email_pass: process.env.email_pass, activation_code: process.env.activation_code, db_url: process.env.db_url};
 }
 
 const nodemailer = require('nodemailer');
@@ -35,7 +35,7 @@ let transporter = nodemailer.createTransport({
 
 var PORT = process.env.PORT || 5000;
 
-mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
+mongoose.connect(sensitive.db_url, {useNewUrlParser: true});
 
 app.use(cookieParser());
 app.use(bodyparser.json());
@@ -191,6 +191,9 @@ app.post('/register', (req, res) => {
 
 
         });
+    } else {
+        res.send({error: -1});
+        return; 
     };
 });
 

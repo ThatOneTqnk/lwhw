@@ -10,10 +10,11 @@ $(document).ready(() => {
         }
         if(data.error) {
             if(data.error == 101) {
-                snacc('Error in contacting servers.')
+                $("#snacc").attr("data-content",'Error in contacting servers.')
             } else if(data.error == 1) {
-                snacc('Invalid combination.');
+                $("#snacc").attr("data-content",'Invalid combination.');
             }
+            $("#snacc").snackbar("show");
         }
         if(data.token) {
             authMe(data.token);

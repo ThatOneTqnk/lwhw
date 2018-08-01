@@ -1,5 +1,6 @@
 var express = require('express');
 var request = require('request');
+var compression = require('compression');
 var bodyparser = require('body-parser');
 var config = false;
 try {
@@ -38,6 +39,7 @@ var PORT = process.env.PORT || 5000;
 mongoose.connect(sensitive.db_url, {useNewUrlParser: true});
 
 app.use(cookieParser());
+app.use(compression());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
     extended: true

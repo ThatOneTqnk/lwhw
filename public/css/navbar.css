@@ -25,10 +25,7 @@
     color: rgba(46, 44, 44, 0.87);
 }
 /* Actual CSS */
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
+
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -48,7 +45,7 @@ body {
     
 }
 
-.riteSide button {
+.riteSide .opts {
     margin-left: 7% !important;
 }
 

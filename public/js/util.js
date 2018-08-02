@@ -39,6 +39,11 @@ function isAuth(username, pass) {
 }
 
 
+function logout() {
+    document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'
+    window.location.replace("/");
+}
+
 function verifyCode(candidateCode) {
     return new Promise((resolve, reject) => {
         $.post("/verify", {code: candidateCode})

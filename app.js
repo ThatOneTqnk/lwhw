@@ -121,6 +121,9 @@ app.post('/ghost_login', (req, res) => {
             }
         });
 
+    } else {
+        res.send({error: -1});
+        return;
     }
 });
 

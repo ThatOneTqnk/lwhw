@@ -1,7 +1,4 @@
 $(document).ready(() => {
-    $("#register").submit(function(e){
-        return false;
-    });
     $('#sendData').click(()=>{processRegister();});
     async function processRegister() {
         let data;

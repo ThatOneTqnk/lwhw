@@ -1,7 +1,4 @@
 $(document).ready(() => {
-    $("#logger").submit(function(e){
-        return false;
-    });
     $('#sendData').click(()=>{processLogin();});
     async function processLogin() {
         let data;
@@ -15,6 +12,8 @@ $(document).ready(() => {
                 $("#snacc").attr("data-content",'Error in contacting servers.')
             } else if(data.error == 1) {
                 $("#snacc").attr("data-content",'Invalid combination.');
+            } else if(data.error == -1) {
+                $("#snacc").attr("data-content",'Please fill out all fields.');
             }
             $("#snacc").snackbar("show");
         }

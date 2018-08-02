@@ -23,3 +23,10 @@ body {
       padding-top: 4%;
   }
 
+  .forgot p {
+      text-align: center;
+  }
+  .forgot a {
+      text-decoration: none;
+  }
+

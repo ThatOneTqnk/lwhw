@@ -9,10 +9,14 @@
         <% include ../partials/navbar %>
         <div class="jumbotron">
             <div class="aside">
-            <h1>LWHW</h1><br>
-            <p class="subtitle">All in one solution for academic management. Helps keep your notes organized so you can study smarter, instead of harder.</p>
-            <div class="spacer"></div>
-            <a class="btn btn-raised btn-primary" href="/register" style="padding: 15px 15px !important;">REGISTER NOW</a>
+                <h1>LWHW</h1><br>
+                <p class="subtitle">All in one solution for academic management. Helps keep your notes organized so you can study smarter, instead of harder.</p>
+                <div class="spacer"></div>
+                <% if (logged) {%>
+                    <a class="btn btn-raised btn-primary" href="/dashboard" style="padding: 15px 15px !important;">ENTER DASHBOARD</a>
+                <% } else { %>
+                    <a class="btn btn-raised btn-primary" href="/register" style="padding: 15px 15px !important;">REGISTER NOW</a>
+                <% } %>
             </div>
         </div>
         <div class="content">

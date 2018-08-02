@@ -25,10 +25,33 @@
     color: rgba(46, 44, 44, 0.87);
 }
 /* Actual CSS */
-
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 body {
     font-family: 'Roboto', sans-serif;
 }
+
+.fixDrop {
+    color:white !important;
+    text-transform: none;
+}
+
+.fixDropper {
+    margin-left: -76%;
+}
+@media screen and (max-width: 768px) {
+    .fixDropper {
+        margin-left: -75%;
+    }
+    
+}
+
+.riteSide button {
+    margin-left: 7% !important;
+}
+
 
 .navbar {
     font-size: 18px;
@@ -46,7 +69,6 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     background-color: white;
     position: -webkit-sticky; /* Safari */
     position: sticky;

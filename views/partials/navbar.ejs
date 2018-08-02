@@ -1,11 +1,27 @@
 <nav class="navbar", style="background-color: #3f51b5; color: white !important;">
         <div class="container-fluid">
             <ul class="nav nav-tabs bg-primary">
-            <li><a class="nav-link fixLink" href="/" style="color: #ffe484;">LWHW</a></li>
+                <li><a class="btn btn-primary nav-link fixLink" href="/" style="color: #ffe484;">LWHW</a></li>
             </ul>
-            <ul class="nav navbar-right nav-tabs bg-primary">
-                <li><a class="btn btn-primary nav-link fixLink" href="/about" style="padding-top: 11px !important;">About</a></li>
-                <li><a class="btn btn-primary nav-link fixLink" href="/login" style="padding-top: 11px !important;">Login</a></li>
+            <ul class="nav navbar-right nav-tabs bg-primary riteSide">
+                <li><a class="btn btn-primary nav-link fixLink" href="/about" style="padding-top: 12px !important; text-transform: none !important;">About</a></li>
+                <% if(logged && username) {%>
+                    <!-- <li><a class="btn btn-primary nav-link fixLink" href="/dashboard" style="padding-top: 11px !important; text-transform: none !important;"><%= username %></a></li> -->
+                    <li style="padding-top: 4px !important;">
+                        <div class="btn-group" style="margin: 0;">
+                            <button type="button" class="fixDrop btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Profile
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right fixDropper">
+                                <a href="/dashboard" class="dropdown-item">Dashboard</a>
+                                <a href="/" class="dropdown-item">Logout</a>
+                            </div>
+                        </div>
+                    </li>
+                <% } else { %>  
+                    <li><a class="btn btn-primary nav-link fixLink" href="/login" style="padding-top: 11px !important; text-transform: none !important;">Login</a></li>
+                <% } %>
+                
             </ul>
         </div>
     </nav>

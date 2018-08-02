@@ -48,7 +48,8 @@ exports.authenticate = function(incToken) {
                 resolve({
                     active_link: link,
                     state: true,
-                    active: resp.active
+                    active: resp.active,
+                    user: resp.username
                 });
             }
             if(err || !resp || (!err && !resp)) {
@@ -56,6 +57,12 @@ exports.authenticate = function(incToken) {
             }
         });
     });
+}
+
+exports.renderData = function(res, page, opts, info) {
+    opts.logged = info.state;
+    opts.username = info.username;
+    return res.render(page, opts);
 }
 
 

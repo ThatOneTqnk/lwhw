@@ -51,17 +51,36 @@ app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 
+app.use(async (req, res, next) => {
+    req.body.state = false;
+    req.body.username = false;
+    if (req.cookies.auth_token) {
+        let isAuth;
+        try {
+            isAuth = await bcryptUtil.authenticate(req.cookies.auth_token);
+        } catch(e) {
+            isAuth = e;
+        }
+        req.body.state = isAuth.state;
+        if(isAuth.state) {
+            req.body.username = isAuth.user;
+            req.body.verified = isAuth.active;
+        }
+    }
+    next();
+});
+
 
 app.get('/', (req, res) => {
-    res.render('pages/index');
+    bcryptUtil.renderData(res, "pages/index", {}, {state: req.body.state, username: req.body.username});
 });
 
 app.get('/login', softAuth, (req, res) => {
-    res.render('pages/login');
+    bcryptUtil.renderData(res, "pages/login", {}, {state: req.body.state, username: req.body.username});
 });
 
 app.get('/register', softAuth, (req, res) => {
-    res.render('pages/register');
+    bcryptUtil.renderData(res, "pages/register", {}, {state: req.body.state, username: req.body.username});
 });
 
 app.post('/verify', (req, res) => {

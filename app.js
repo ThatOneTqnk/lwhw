@@ -39,7 +39,7 @@ var PORT = process.env.PORT || 5000;
 mongoose.connect(sensitive.db_url, {useNewUrlParser: true});
 
 app.use(cookieParser());
-app.use(compression());
+// app.use(compression());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
     extended: true

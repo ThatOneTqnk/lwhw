@@ -1,7 +1,9 @@
 $(document).ready(() => {
-    document.querySelector('form').addEventListener('submit', processRegister);
-    async function processRegister(e) {
-        e.preventDefault();
+    $("#register").submit(function(e){
+        return false;
+    });
+    $('#sendData').click(()=>{processRegister();});
+    async function processRegister() {
         let data;
         try {
             data = await register($('#user').val(), $('#username').val(), $('#pass').val(), $('#passConf').val(), $('#devCode').val());

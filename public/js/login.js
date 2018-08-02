@@ -1,7 +1,9 @@
 $(document).ready(() => {
-    document.querySelector('form').addEventListener('submit', processLogin);
-    async function processLogin(e) {
-        e.preventDefault();
+    $("#logger").submit(function(e){
+        return false;
+    });
+    $('#sendData').click(()=>{processLogin();});
+    async function processLogin() {
         let data;
         try {
             data = await isAuth($('#uname').val(), $('#psw').val());

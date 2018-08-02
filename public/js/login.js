@@ -1,4 +1,5 @@
 $(document).ready(() => {
+    alert('bello')
     $("#logger").submit(function(e){
         return false;
     });

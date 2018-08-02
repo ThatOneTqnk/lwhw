@@ -1,6 +1,10 @@
 // import { verifyCode } from "../../util/bcrypt";
 $(document).ready(() => {
-    $('#checkCode').click(async () => {
+    $("#activation").submit(function(e){
+        return false;
+    });
+    $('#activater').click(()=>{processActivate();});
+    async function processActivate() {
         let code = $('#activate').val();
         let result;
         try {
@@ -12,14 +16,15 @@ $(document).ready(() => {
             window.location.replace("/dashboard/");
         } else {
             if(result.error == 101) {
-                snacc('Error in contacting servers.')
+                $("#snacc").attr("data-content",'Error in contacting servers.')
             } else if(result.error == 3) {
-                snacc('Incorrect E-mail code.')
+                $("#snacc").attr("data-content",'Incorrect E-mail code.')
             } else if(result.error == 2) {
-                snacc('Session expired. Relog.')
-            } else if(result.error == 1) {
-                snacc('Please enter a code.')
+                $("#snacc").attr("data-content",'Session expired. Relog.')
+            } else if(result.error == -1) {
+                $("#snacc").attr("data-content",'Please enter a code.')
             }
+            $("#snacc").snackbar("show");
         }
-    });
+    };
 });

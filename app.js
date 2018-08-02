@@ -94,6 +94,9 @@ app.post('/verify', (req, res) => {
                 return;
             }
         });
+    } else {
+        res.send({error: -1});
+        return;
     }
 });
 

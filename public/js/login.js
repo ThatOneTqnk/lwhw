@@ -1,4 +1,7 @@
 $(document).ready(() => {
+    $("#logger").submit(function(e){
+        return false;
+    });
     $('#sendData').click(()=>{processLogin();});
     async function processLogin() {
         let data;

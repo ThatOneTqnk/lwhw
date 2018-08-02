@@ -36,17 +36,17 @@ body {
 }
 
 .fixDropper {
-    margin-left: -76%;
+    margin-left: -180%;
 }
 @media screen and (max-width: 768px) {
     .fixDropper {
-        margin-left: -75%;
+        margin-left: -180%;
     }
     
 }
 
 .riteSide .opts {
-    margin-left: 7% !important;
+    margin-right: 7% !important;
 }
 
 

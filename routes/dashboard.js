@@ -18,7 +18,7 @@ app.get('/', async (req, res) => {
         res.redirect('/dashboard/activate');
         return;
     }
-    bcryptUtil.renderData(res, "pages/mainDash", {}, {state: req.body.state, username: req.body.username});
+    bcryptUtil.renderData(res, "pages/mainDash", {}, {state: req.body.state, username: req.body.plainuser});
 });
 
 app.get('/activate', async (req, res) => {
@@ -26,7 +26,7 @@ app.get('/activate', async (req, res) => {
         res.redirect('/dashboard');
         return;
     }
-    bcryptUtil.renderData(res, "pages/activate", {}, {state: req.body.state, username: req.body.username});
+    bcryptUtil.renderData(res, "pages/activate", {}, {state: req.body.state, username: req.body.plainuser});
 });
 
 app.use(function (req, res, next) {

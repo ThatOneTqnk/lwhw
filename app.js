@@ -53,7 +53,7 @@ app.set('view engine', 'ejs');
 
 app.use(async (req, res, next) => {
     req.body.state = false;
-    req.body.username = false;
+    req.body.plainuser = false;
     if (req.cookies.auth_token) {
         let isAuth;
         try {
@@ -63,7 +63,7 @@ app.use(async (req, res, next) => {
         }
         req.body.state = isAuth.state;
         if(isAuth.state) {
-            req.body.username = isAuth.user;
+            req.body.plainuser = isAuth.user;
             req.body.verified = isAuth.active;
         }
     }
@@ -72,15 +72,15 @@ app.use(async (req, res, next) => {
 
 
 app.get('/', (req, res) => {
-    bcryptUtil.renderData(res, "pages/index", {}, {state: req.body.state, username: req.body.username});
+    bcryptUtil.renderData(res, "pages/index", {}, {state: req.body.state, username: req.body.plainuser});
 });
 
 app.get('/login', softAuth, (req, res) => {
-    bcryptUtil.renderData(res, "pages/login", {}, {state: req.body.state, username: req.body.username});
+    bcryptUtil.renderData(res, "pages/login", {}, {state: req.body.state, username: req.body.plainuser});
 });
 
 app.get('/register', softAuth, (req, res) => {
-    bcryptUtil.renderData(res, "pages/register", {}, {state: req.body.state, username: req.body.username});
+    bcryptUtil.renderData(res, "pages/register", {}, {state: req.body.state, username: req.body.plainuser});
 });
 
 app.post('/verify', (req, res) => {

@@ -2,48 +2,27 @@ var express = require('express');
 var request = require('request');
 var compression = require('compression');
 var bodyparser = require('body-parser');
-var config = false;
-try {
-    config = require('./config.json');
-} catch(e) {
-    console.log('Shell alternatives will be accessed.');
-}
 var app = express();
 var path = require('path');
 var mongoose = require('mongoose');
 var User = require('./models/user.js');
 var uuidv4 = require('uuid/v4');
-var bcryptUtil = require('./util/bcrypt.js');
+
 var cookieParser = require('cookie-parser');
 var validator = require('validator');
 var softAuth = require('./auth/softAuth.js');
-
-var sensitive;
-if(config) {
-    sensitive = {email_pass: config.email_pass, activation_code: config.activation_code, db_url: config.db_url};
-} else {
-    sensitive = {email_pass: process.env.email_pass, activation_code: process.env.activation_code, db_url: process.env.db_url};
-}
-
-const nodemailer = require('nodemailer');
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: "lwhwservice@gmail.com", // service is detected from the username
-        pass: sensitive.email_pass
-    }
-});
+var bcryptUtil = require('./util/bcrypt.js');
 
 var PORT = process.env.PORT || 5000;
 
-mongoose.connect(sensitive.db_url, {useNewUrlParser: true});
+mongoose.connect(bcryptUtil.sensitive.db_url, {useNewUrlParser: true});
 
 app.use(cookieParser());
 app.use(compression());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({
     extended: true
-  }));
+}));
 
 
 app.use(express.static('public'));
@@ -86,10 +65,6 @@ app.get('/register', softAuth, (req, res) => {
 app.post('/verify', (req, res) => {
     if(req.body.code) {
         let code = req.body.code
-        if(code.length == 0) {
-            res.send({error: 1});
-            return;
-        }
         code = code.toUpperCase().slice(0, 5);
         User.findOne({token: req.cookies.auth_token}, (err, resp) => {
             if(resp) {
@@ -115,6 +90,52 @@ app.post('/verify', (req, res) => {
         });
     } else {
         res.send({error: -1});
+        return;
+    }
+});
+
+
+
+app.post('/resend', (req, res) => {
+    if(req.body.token) {
+        User.findOne({token: req.body.token}, async (err, resp) => {
+            if(resp) {
+                let date = (new Date).getTime();
+                let changeDate = false;
+                if(!resp.resend_date) {
+                    changeDate = true;
+                } else {
+                    if(!(((date - resp.resend_date) / 1000) >= 60)) {
+                        res.send({error: 2});
+                        return;
+                    } else {
+                        changeDate = true;
+                    }
+                }
+                if(changeDate) {
+                    resp.set({resend_date: date});
+                    let retained;
+                    try {
+                        retained = await bcryptUtil.retainData(resp); 
+                    } catch(e) {
+                        retained = e;
+                    }
+                    if(retained.error) {
+                        res.send({error: 1});
+                        return;
+                    }
+                }
+                bcryptUtil.sendCode(resp.email, resp.activationCode);
+                res.send({good: true});
+                return;
+            }
+            if(err || !resp || (!err && !resp)) {
+                res.send({error: 1});
+                return;
+            }
+        });
+    } else {
+        res.send({error: 101});
         return;
     }
 });
@@ -150,7 +171,7 @@ app.post('/ghost_login', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    if(!(req.body.devCode === sensitive.activation_code)) {
+    if(!(req.body.devCode === bcryptUtil.sensitive.activation_code)) {
         res.send({error: 5});
         return;
     }
@@ -169,7 +190,7 @@ app.post('/register', (req, res) => {
             return;
         }
         var userData = {
-            email: req.body.email,
+            email: req.body.email.toLowerCase(),
             username_lower: req.body.username.toLowerCase(),
             username: req.body.username,
             password: bcryptUtil.hash(req.body.password),
@@ -201,16 +222,7 @@ app.post('/register', (req, res) => {
                     return;
                 } else {
                     console.log('reached this pt.');
-                    transporter.sendMail({
-                        from: 'lwhwservice@gmail.com',
-                        to: `${userData.email}`,
-                        subject: 'Verification Link',
-                        text: `Your verification code is ${userData.activationCode}`,
-                        html: `<p>Your verification code is ${userData.activationCode}</p>`
-                    }, (err, info) => {
-                        if(err) console.log(err);
-                        if(info) console.log(info);
-                    });
+                    bcryptUtil.sendCode(userData.email, userData.activationCode);
                     res.send({token: userData.token});
                     return;
                 }
@@ -224,6 +236,7 @@ app.post('/register', (req, res) => {
     };
 });
 
+app.use("/forgot", require("./routes/forgot"));
 app.use("/dashboard", require("./routes/dashboard"));
 
 app.use(function (req, res, next) {

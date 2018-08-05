@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/header %>
+        <title>Forgot Password</title>
+        <link rel="stylesheet" href="/css/login.css">
+        
+    </head>
+    <body>
+        <% include ../partials/navbar %>
+        <div class="spacer"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 offset-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div id="content">
+                                <h2>Forgot Password?</h2>
+                                <p>It's alright. We all do it. Input your e-mail and we'll send you a recovery code.</p>
+                                <form id="forgot">
+                                    <div class="form-group">
+                                        <label for="putEmail" class="bmd-label-floating">Email</label>
+                                        <input type="email" class="form-control" name="putEmail" id="putEmail">
+                                        <span class="bmd-help">Enter your e-mail so we can send a recovery code.</span>
+                                    </div><br>
+                                    <button type="submit" id="sendCode" class="btn btn-outline-primary" style="padding-top: 11px 11px;">Submit</button>
+                                </form>
+                            </div>
+
+                            <div id="content2" style="display:none;">
+                                <h2>Enter code.</h2>
+                                <p>If the email you inserted is valid (<strong id="emailInsert"></strong>),  you will receive an email containing the recovery code.</p>
+                                <form id="forgot2">
+                                    <div class="form-group">
+                                        <label for="putCode" class="bmd-label-floating">Recovery Code</label>
+                                        <input type="text" class="form-control" name="putCode" id="putCode">
+                                        <span class="bmd-help">Enter the recovery code.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="putPass" class="bmd-label-floating">New Password</label>
+                                        <input type="password" class="form-control showPass" name="putPass" id="putPass">
+                                        <span class="bmd-help">Enter your new password.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="putPassC" class="bmd-label-floating">Password Confirmation</label>
+                                        <input type="password" class="form-control showPass" name="putPassC" id="putPassC">
+                                        <span class="bmd-help">Enter password confirmation.</span>
+                                    </div><br>
+                                    <div class="checkbox">
+                                        <label style="color: black;">
+                                            <input type="checkbox" onclick="showPasswords()"> Show password
+                                        </label>
+                                    </div><br>
+                                    <button type="submit" id="tryCode" class="btn btn-outline-primary" style="padding-top: 11px 11px;">Submit</button>
+                                </form>
+                            </div>
+
+                            <div id="content3" style="display:none;">
+                                <h2>Success!</h2>
+                                <p>Your account has been recovered with the new password in place.</p>
+                                <br><a href="./">Return to home</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="spacer"></div>
+        <script src="/js/forgot.js"></script>
+        <% include ../partials/snackbar %>
+    </body>
+</html>

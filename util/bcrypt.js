@@ -1,8 +1,29 @@
+var config = false;
+try {
+    config = require('../config.json');
+} catch(e) {
+    console.log('Shell alternatives will be accessed.');
+}
+if(config) {
+    exports.sensitive = {email_pass: config.email_pass, activation_code: config.activation_code, db_url: config.db_url};
+} else {
+    exports.sensitive = {email_pass: process.env.email_pass, activation_code: process.env.activation_code, db_url: process.env.db_url};
+}
+
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 const verCodeOpts = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 const User = require('../models/user.js')
 const mongoose = require('mongoose');
+
+const nodemailer = require('nodemailer');
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: "lwhwservice@gmail.com",
+        pass: this.sensitive.email_pass
+    }
+});
 
 exports.validatePassword = function(password, compare) {
     return bcrypt.compareSync(password, compare);
@@ -65,6 +86,40 @@ exports.renderData = function(res, page, opts, info) {
     return res.render(page, opts);
 }
 
+
+exports.sendCode = function(email, code) {
+    transporter.sendMail({
+        from: 'lwhwservice@gmail.com',
+        to: `${email}`,
+        subject: 'Verification Link',
+        text: `Your verification code is ${code}`,
+        html: `<p>Your verification code is ${code}</p>`
+    }, (err, info) => {
+        if(err) console.log(err);
+        if(info) console.log(info);
+    });
+}
+exports.sendForgotCode = function(email, code) {
+    transporter.sendMail({
+        from: 'lwhwservice@gmail.com',
+        to: `${email}`,
+        subject: 'Forgot Password Reset',
+        text: `Forgot your password? Here is the reset code: ${code}`,
+        html: `<p>Forgot your password? Here is the reset code: ${code}</p>`
+    }, (err, info) => {
+        if(err) console.log(err);
+        if(info) console.log(info);
+    });
+}
+
+exports.retainData = function(userDoc) {
+    return new Promise((resolve, reject) => {
+        userDoc.save(function (err, updated) {
+            if (err) reject({error: 1});
+            resolve({good: true});
+        });
+    });
+}
 
 // Simple function to oreturn what route to go to depending on email verification state
 // exports.routeActive = function(bool) {

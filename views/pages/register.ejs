@@ -26,12 +26,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="pass" class="bmd-label-floating">Password</label>
-                                    <input type="password" name="pass" class="form-control" id="pass">
+                                    <input type="password" name="pass" class="form-control showPass" id="pass">
                                 </div>
                                 <div class="form-group">
                                     <label for="passConf" class="bmd-label-floating">Password Confirmation</label>
-                                    <input type="password" name="passConf" class="form-control" id="passConf">
-                                </div>
+                                    <input type="password" name="passConf" class="form-control showPass" id="passConf">
+                                </div><br>
+                                <div class="checkbox">
+                                    <label style="color: black;">
+                                        <input type="checkbox" onclick="showPasswords()"> Show password
+                                    </label>
+                                </div><br>
                                 <div class="form-group">
                                     <label for="devCode" class="bmd-label-floating">Developer Code</label>
                                     <input type="text" name="devCode" class="form-control" id="devCode">

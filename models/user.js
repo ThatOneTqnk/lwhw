@@ -27,10 +27,14 @@ var UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  resend_date: {
+    type: Date
+  },
+  forgot_code: {
+    type: String
+  },
   activationCode: {
-    type: String,
-    unique: true,
-    required: true
+    type: String
   },
   token: {
     type: String,

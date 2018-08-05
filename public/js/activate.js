@@ -27,4 +27,31 @@ $(document).ready(() => {
             $("#snacc").snackbar("show");
         }
     };
+    $('#resend').click(async () => {
+        let token = getCookie('auth_token');
+        if(token.length == 0) {
+            $("#snacc").attr("data-content",'Invalid session. Please relog.');
+            $("#snacc").snackbar("show");
+            return;
+        } 
+        let result;
+        try {
+            result = await tryResend(token);
+        } catch(e) {
+            result = e;
+        }
+        if(result.good) {
+            $("#snacc").attr("data-content",'Sweet! A verification e-mail has been sent!');
+        }
+        if(result.error) {
+            if(result.error == 2) {
+                $("#snacc").attr("data-content",'Please wait a minute before resending again.');
+            } else if(result.error == 101) {
+                $("#snacc").attr("data-content",'Session expired. Relog');
+            } else {
+                $("#snacc").attr("data-content",'An error occurred. Please try again.');
+            }
+        }
+        $("#snacc").snackbar("show");
+    });
 });

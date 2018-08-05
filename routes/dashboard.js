@@ -28,7 +28,3 @@ app.get('/activate', async (req, res) => {
     }
     bcryptUtil.renderData(res, "pages/activate", {}, {state: req.body.state, username: req.body.plainuser});
 });
-
-app.use(function (req, res, next) {
-    res.status(404).send("Sorry can't find that!")
-})

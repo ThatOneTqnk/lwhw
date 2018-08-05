@@ -6,14 +6,6 @@ var mongoose = require('mongoose');
 var User = require('../models/user.js');
 var bcryptUtil = require('../util/bcrypt.js');
 
-// app.use((req, res, next) => {
-//     if (!req.body.state) {
-//         res.redirect('/');
-//     } else {
-//         next();
-//     }
-// });
-
 app.use((req, res, next) => {
     if (req.body.state) {
         res.redirect('/dashboard');

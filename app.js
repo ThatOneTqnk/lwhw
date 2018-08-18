@@ -5,12 +5,18 @@ var bodyparser = require('body-parser');
 var app = express();
 var path = require('path');
 var mongoose = require('mongoose');
+
+// Models
 var User = require('./models/user.js');
+var Assignment = require('./models/assignment.js');
+var Course = require('./models/course.js');
+
 var uuidv4 = require('uuid/v4');
 
 var cookieParser = require('cookie-parser');
 var validator = require('validator');
 var softAuth = require('./auth/softAuth.js');
+var hardAuth = require('./auth/hardAuth.js');
 var bcryptUtil = require('./util/bcrypt.js');
 
 var PORT = process.env.PORT || 5000;
@@ -29,6 +35,8 @@ app.use(express.static('public'));
 
 
 app.set('view engine', 'ejs');
+
+app.use("/api", require("./routes/api"));
 
 app.use(async (req, res, next) => {
     req.body.state = false;
@@ -70,6 +78,8 @@ app.post('/verify', (req, res) => {
             if(resp) {
                 if(code == resp.activationCode) {
                     resp.set({ active: true });
+                    if (resp.resend_date) resp.resend_date = undefined;
+                    if (resp.activationCode) resp.activationCode = undefined;
                     resp.save(function (err, updated) {
                         if (err) {
                             res.send({error: 101});
@@ -94,6 +104,140 @@ app.post('/verify', (req, res) => {
     }
 });
 
+app.post('/hw', async (req, res) => {
+    if(!req.body.state) {
+        res.status(401).send('Unauthorized');
+        return;
+    }
+    if(req.body.title && req.body.desc) {
+        if(req.body.title.length > 45) {
+            res.send({err: 'Maximum title length is 45 characters.'});
+            return;
+        }
+        if(req.body.desc.length > 500) {
+            res.send({err: 'Description cannot be greater than 500 characters'});
+            return;
+        }
+        var assignData = {
+            title: req.body.title,
+            desc: req.body.desc,
+            created: (new Date).getTime()
+        }
+        let assignTry;
+        try {
+            assignTry = await bcryptUtil.createNote(assignData);
+        } catch(e) {
+            assignTry = e;
+        }
+        if(assignTry.err) {
+            res.send(assignTry);
+            return;
+        }
+        User.findOne({token: req.cookies.auth_token}, async (err, resp) => {
+            if(resp) {
+                resp.assign.push(assignTry.id);
+                let retained;
+                try {
+                    retained = await bcryptUtil.retainData(resp); 
+                } catch(e) {
+                    retained = e;
+                }
+                if(retained.error) {
+                    res.send({err: 'Could not save data. Try again.'});
+                    return;
+                } else {
+                    res.send({good: true});
+                    return;
+                }
+            }
+            if(err || !resp || (!err && !resp)) {
+                res.send({err: 'Not authenticated.'});
+                return;
+            }
+        });
+    } else {
+        res.send({err: 'Must include assignment title and description.'});
+        return;
+    }
+});
+
+let acceptedColors = [
+    'blue',
+    'red',
+    'green',
+    'yellow',
+    'gold',
+    'teal',
+    'purple'
+]
+
+app.post('/course', hardAuth, async (req, res) => {
+    if(req.body.course && req.body.color) {
+        if(req.body.course.length > 25) {
+            res.send({err: 'Course length cannot exceed 25 characters.'});
+            return;
+        }
+        let realColor = req.body.color.toLowerCase();
+        if(acceptedColors.indexOf(realColor) < 0) {
+            res.send({err: 'Color not recognized.'});
+            return;
+        }
+        let courseData = {
+            name: req.body.course,
+            color: realColor,
+            name_lower: req.body.course.toLowerCase()
+        };
+        User.findOne({token: req.cookies.auth_token}, async (err, resp) => {
+            if(resp) {
+                let mutualCourse;
+                if(resp.course.length > 0) {
+                    try {
+                        mutualCourse = await bcryptUtil.matchCourse(courseData.name_lower);
+                    } catch(e) {
+                        mutualCourse = e;
+                    }
+                }
+                if(mutualCourse) {
+                    res.send({err: 'You already have a course by this name.'});
+                    return;
+                }
+                let courseTry;
+                try {
+                    courseTry = await bcryptUtil.createCourse(courseData);
+                } catch(e) {
+                    courseTry = e;
+                }
+                if(courseTry.err) {
+                    res.send({err:'An error occurred.'});
+                    return;
+                }
+                resp.course.push(courseTry.id);
+                let retained;
+                try {
+                    retained = await bcryptUtil.retainData(resp);
+                } catch(e) {
+                    retained = e;
+                }
+                if(retained.error) {
+                    res.send({err: 'An error occurred.'});
+                    return;
+                } else {
+                    res.send({good: true});
+                    return;
+                }
+
+                if(err || !resp || (!err && !resp)) {
+                    res.send({err: 'Not authenticated'});
+                    return;
+                }
+            }
+        });
+        
+    } else {
+        res.send({err: 'All fields must be filled out.'});
+        return;
+    }
+});
 
 
 app.post('/resend', (req, res) => {
@@ -240,7 +384,8 @@ app.use("/forgot", require("./routes/forgot"));
 app.use("/dashboard", require("./routes/dashboard"));
 
 app.use(function (req, res, next) {
-    res.status(404).send("Sorry can't find that!")
+    res.status(404);
+    bcryptUtil.renderData(res, "pages/notfound", {}, {state: req.body.state, username: req.body.plainuser});
 })
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

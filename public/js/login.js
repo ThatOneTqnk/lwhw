@@ -12,7 +12,7 @@ $(document).ready(() => {
         }
         if(data.error) {
             if(data.error == 101) {
-                $("#snacc").attr("data-content",'Error in contacting servers.')
+                $("#snacc").attr("data-content",'Error in contacting servers.');
             } else if(data.error == 1) {
                 $("#snacc").attr("data-content",'Invalid combination.');
             } else if(data.error == -1) {

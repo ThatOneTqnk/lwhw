@@ -3,13 +3,17 @@ let User = require('../models/user.js');
 let bcryptUtil = require('../util/bcrypt.js');
 
 module.exports = async function(req, res, next) {
-    if(req.body.state) {
+    if (req.method == "GET") {
         if(req.body.verified) {
-            return res.redirect('/dashboard/');
+            next()
         } else {
-            return res.redirect('/dashboard/activate');
+            res.redirect('/dashboard/activate');
         }
     } else {
-        next();
+        if(req.body.verified) {
+            next()
+        } else {
+            return res.send({err: 'Not authenticated.'})
+        }
     }
 }

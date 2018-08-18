@@ -52,6 +52,12 @@ function showPasswords() {
     });
 }
 
+function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
 
 function tryResend(auth) {
     return new Promise((resolve, reject) => {
@@ -136,5 +142,37 @@ function reqForgotCode(candidateEmail) {
         .fail(() => {
             reject({error: 101});
         });
+    });
+}
+
+function createNote(title, desc) {
+    return new Promise((resolve, reject) => {
+        $.post('/hw', {title: title, desc: desc})
+        .done((data) => {
+            if(data.err) {
+                reject(data);
+            } else {
+                resolve(data);
+            }
+        })
+        .fail(() => {
+            reject({err: 'An error occurred contacting the site.'});
+        });
+    });
+}
+
+function createCourse(course, color) {
+    return new Promise((resolve, reject) => {
+        $.post('/course', {course: course, color: color})
+        .done((data) => {
+            if(data.err) {
+                reject(data)
+            } else {
+                resolve(data)
+            }
+        })
+        .fail(() => {
+            reject({err: 'An error occurred contacting the site.'})
+        })
     });
 }

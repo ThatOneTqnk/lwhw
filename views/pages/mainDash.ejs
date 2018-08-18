@@ -3,10 +3,19 @@
     <head>
         <% include ../partials/header %>
         <title>Dashboard</title>
+        <link rel="stylesheet" href="/css/mainDash.css">
     </head>
     <body>
         <% include ../partials/navbar %>
-        <h2><b>Normie</b></h2>
+        <div class="jumbotron">
+            <div class="content">
+                <h5><b>Welcome, <%= username %></b></h5><br>
+                <p>You have no assigments to complete today!</p><br>
+                <a href="/dashboard/course">Curriculum Management</a>
+                <a href="/dashboard/hw">Assignment Tracker</a>
+                <a href="/dashboard/notes">Note Sorter</a>
+            </div>
+        </div>
         <% include ../partials/snackbar %>
     </body>
 </html>

@@ -14,6 +14,8 @@ var bcrypt = require('bcrypt');
 const saltRounds = 10;
 const verCodeOpts = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 const User = require('../models/user.js')
+const Assignment = require('../models/assignment.js');
+const Course = require('../models/course.js')
 const mongoose = require('mongoose');
 
 const nodemailer = require('nodemailer');
@@ -121,6 +123,68 @@ exports.retainData = function(userDoc) {
     });
 }
 
+exports.createNote = function(noteData) {
+    return new Promise((resolve, reject) => {
+        Assignment.create(noteData, (err, assign, next) => {
+            if(err) {
+                reject({err: 'An error occurred.'});
+            } else {
+                resolve({id: assign._id});
+            }
+        });
+    });
+}
+
+exports.createCourse = function(courseData) {
+    return new Promise((resolve, reject) => {
+        Course.create(courseData, (err, course, next) => {
+            if(err) {
+                reject({err: 'An error occurred.'});
+            } else {
+                resolve({id: course._id});
+            }
+        });
+    });
+}
+
+exports.matchCourse = function(courseName) {
+    return new Promise((resolve, reject) => {
+        Course.findOne({name_lower: courseName}, (err, res) => {
+            if(res) {
+                resolve(res);
+            }
+            if(err || !res || (!err && !res)) {
+                reject(undefined);
+            }
+        });
+    });
+}
+
+exports.getCourses = function(courseArr) {
+    return new Promise((resolve, reject) => {
+        Course.find({"_id":{$in: courseArr}}, (err, res) => {
+            if(res) {
+                resolve(res);
+            }
+            if(err || !res || (!err && !res)) {
+                reject({err: true});
+            }
+        })
+    });
+}
+
+exports.getHW = function(hwArr) {
+    return new Promise((resolve, reject) => {
+        Assignment.find({"_id":{$in: hwArr}}, (err, res) => {
+            if(res) {
+                resolve(res);
+            }
+            if(err || !res || (!err && !res)) {
+                reject({err: true});
+            }
+        });
+    });
+}
 // Simple function to oreturn what route to go to depending on email verification state
 // exports.routeActive = function(bool) {
 //     let state = "/dashboard/activate"

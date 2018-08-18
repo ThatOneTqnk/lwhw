@@ -40,6 +40,12 @@ var UserSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true
+  },
+  assign: {
+    type: Array
+  },
+  course: {
+    type: Array
   }
 });
 

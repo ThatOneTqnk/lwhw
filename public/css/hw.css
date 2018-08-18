@@ -1,0 +1,10 @@
+body {
+    background-color: rgb(224, 229, 234);
+}
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    width: 100%;
+}

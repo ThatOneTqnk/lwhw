@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/header %>
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="/css/hw.css">
+    </head>
+    <body>
+        <% include ../partials/navbar %><br>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 offset-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Add</h2>
+                            <p>Add an assignment to the tracker.</p>
+                            <form id="addAssign">
+                                <div class="form-group">
+                                    <label for="atitle" class="bmd-label-floating">Title</label>
+                                    <input type="text" name="atitle" class="form-control" id="atitle">
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="Description" id="desc" cols="80" rows="10"></textarea>
+                                </div><br>
+                                <button type="submit" class="btn btn-outline-primary" id="sendData" style="padding-top: 11px 11px;">Add</button>
+                            </form><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% include ../partials/snackbar %>
+        <script src="/js/hw.js"></script>
+    </body>
+</html>

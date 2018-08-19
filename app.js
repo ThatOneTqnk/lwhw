@@ -74,7 +74,7 @@ app.post('/verify', (req, res) => {
     if(req.body.code) {
         let code = req.body.code
         code = code.toUpperCase().slice(0, 5);
-        User.findOne({token: req.cookies.auth_token}, (err, resp) => {
+        User.findOne({token: req.cookies.auth_token}, async (err, resp) => {
             if(resp) {
                 if(code == resp.activationCode) {
                     resp.set({ active: true });

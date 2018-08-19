@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 var User = require('../models/user.js');
 var bcryptUtil = require('../util/bcrypt.js');
 
+let unauth = {"status":{"message":"Unauthenticated","status_code": 401}};
+
 app.post('/courses', hardAuthAPI, (req, res) => {
     User.findOne({token: req.body.token}, async (err, resp) => {
         if(resp) {
@@ -28,7 +30,22 @@ app.post('/courses', hardAuthAPI, (req, res) => {
             return;
         }
         if(err || !resp || (!err && !resp)) {
-            res.send({"status":{"message":"Unauthenticated","status_code": 401}});
+            res.send(unauth);
+            return;
+        }
+    });
+});
+
+app.post('/courses/delete', hardAuthAPI, (req, res) => {
+    User.findOne({token: req.body.token}, async (err, resp) => {
+        if(resp) {
+            if(resp.course.length == 0) {
+                res.send({"error":{"message":"No courses found."}})
+            }
+
+        }
+        if(err || !resp || (!err && !resp)) {
+            res.send(unauth);
             return;
         }
     });

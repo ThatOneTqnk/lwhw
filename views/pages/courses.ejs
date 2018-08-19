@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <% include ../partials/header %>
+        <% include ../partials/deferHeader %>
         <title>Courses</title>
-        <link rel="stylesheet" href="/css/hw.css">
+        <link rel="stylesheet" href="/css/courses.css">
     </head>
     <body>
         <% include ../partials/navbar %><br>
-        <div class="container-fluid">
-            <div id="load">
-                <p></p>
-            </div>
+        <div class="intro">
+            <h1>Courses</h1>
+            <p>These are the courses in your account.</p><p>Need to add a course? Click <a href="/dashboard/course/">here.</a></p><hr><br>
             
-            
-            <div id="courses">
-            </div>
-        
-        
+        </div>
+        <div class="container-fluid" id="failure">
+            <div id="load"><p></p></div>
         </div>
         <% include ../partials/snackbar %>
         <script src="/js/courses.js"></script>

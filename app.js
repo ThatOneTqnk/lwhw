@@ -80,14 +80,19 @@ app.post('/verify', (req, res) => {
                     resp.set({ active: true });
                     if (resp.resend_date) resp.resend_date = undefined;
                     if (resp.activationCode) resp.activationCode = undefined;
-                    resp.save(function (err, updated) {
-                        if (err) {
-                            res.send({error: 101});
-                            return;
-                        }
+                    let retained;
+                    try {
+                        retained = await bcryptUtil.retainData(resp); 
+                    } catch(e) {
+                        retained = e;
+                    }
+                    if(retained.error) {
+                        res.send({err: 101});
+                        return;
+                    } else {
                         res.send({good: true});
                         return;
-                    });
+                    }
                 } else {
                     res.send({error: 3});
                     return;

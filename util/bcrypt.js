@@ -185,6 +185,18 @@ exports.getHW = function(hwArr) {
         });
     });
 }
+
+exports.deleteCourse = function(id) {
+    return new Promise((resolve, reject) => {
+        Course.deleteOne({"_id": id}, (err) => {
+            if(err) {
+                reject({err: err});
+            } else {
+                resolve(true);
+            }
+        });
+    });
+}
 // Simple function to oreturn what route to go to depending on email verification state
 // exports.routeActive = function(bool) {
 //     let state = "/dashboard/activate"

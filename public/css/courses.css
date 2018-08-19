@@ -20,3 +20,7 @@ body {
 hr {
     width: 50%; margin-left: 25%; margin-top: 2%;
 }
+
+.noCourse {
+    text-align: center;
+}

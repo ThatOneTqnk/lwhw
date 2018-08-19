@@ -9,47 +9,7 @@ var bcryptUtil = require('../util/bcrypt.js');
 
 let unauth = {"status":{"message":"Unauthenticated","status_code": 401}};
 
-app.post('/courses', hardAuthAPI, (req, res) => {
-    User.findOne({token: req.body.token}, async (err, resp) => {
-        if(resp) {
-            if(resp.course.length == 0) {
-                res.send({"courses": []});
-                return;
-            } 
-            let courses;
-            try {
-                courses = await bcryptUtil.getCourses(resp.course);
-            } catch(e) {
-                courses = e;
-            }
-            if(courses.err) {
-                res.send({"error":{"message": "Could not fetch data"}});
-                return;
-            }
-            res.send({"courses": courses});
-            return;
-        }
-        if(err || !resp || (!err && !resp)) {
-            res.send(unauth);
-            return;
-        }
-    });
-});
-
-app.post('/courses/delete', hardAuthAPI, (req, res) => {
-    User.findOne({token: req.body.token}, async (err, resp) => {
-        if(resp) {
-            if(resp.course.length == 0) {
-                res.send({"error":{"message":"No courses found."}})
-            }
-
-        }
-        if(err || !resp || (!err && !resp)) {
-            res.send(unauth);
-            return;
-        }
-    });
-});
+app.use("/courses", require("./apiCourse"));
 
 app.post('/assignments', hardAuthAPI, (req, res) => {
     User.findOne({token: req.body.token}, async (err, resp) => {

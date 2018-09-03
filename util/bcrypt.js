@@ -147,9 +147,9 @@ exports.createCourse = function(courseData) {
     });
 }
 
-exports.matchCourse = function(courseName) {
+exports.matchCourse = function(courseName, id) {
     return new Promise((resolve, reject) => {
-        Course.findOne({name_lower: courseName}, (err, res) => {
+        Course.findOne({name_lower: courseName, user: id}, (err, res) => {
             if(res) {
                 resolve(res);
             }

@@ -14,6 +14,10 @@ var CourseSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },
+    user: {
+        type: String,
+        required: true
     }
 });
 

@@ -16,6 +16,7 @@ $(document).ready(() => {
             $("#snacc").attr("data-content", success.err);
         } else {
             $("#snacc").attr("data-content",'Saved course.');
+            window.location.replace("/dashboard/course/list");
         }
         $("#snacc").snackbar("show");
     });

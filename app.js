@@ -194,10 +194,11 @@ app.post('/course', hardAuth, async (req, res) => {
         };
         User.findOne({token: req.cookies.auth_token}, async (err, resp) => {
             if(resp) {
+                courseData.user = resp._id;
                 let mutualCourse;
                 if(resp.course.length > 0) {
                     try {
-                        mutualCourse = await bcryptUtil.matchCourse(courseData.name_lower);
+                        mutualCourse = await bcryptUtil.matchCourse(courseData.name_lower, resp._id);
                     } catch(e) {
                         mutualCourse = e;
                     }

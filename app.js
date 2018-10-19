@@ -290,12 +290,25 @@ app.post('/resend', (req, res) => {
     }
 });
 
-app.post('/ghost_login', (req, res) => {
+app.post('/ghost_login', async (req, res) => {
     if(req.body.user && req.body.pass) {
         let credentials = {user: req.body.user.toLowerCase(), pass: req.body.pass};
-        if(credentials.user.length > 20 || credentials.user.pass > 100) {
+        if(credentials.user.pass > 100) {
             res.send({error: 1});
             return;
+        }
+        let userStatus;
+        try {
+            userStatus = await bcryptUtil.loginUserMachine(credentials.user);
+        } catch(e) {
+            userStatus = e;
+        }
+        if(userStatus.err) {
+            res.send({error: 1});
+            return;
+        }
+        if(!userStatus.providedUser) {
+            credentials.user = userStatus.username;
         }
         User.findOne({username_lower: credentials.user}, async (err, resp) => {
             if(resp) {

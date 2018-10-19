@@ -14,7 +14,7 @@ $(document).ready(() => {
             if(data.error == 101) {
                 $("#snacc").attr("data-content",'Error in contacting servers.');
             } else if(data.error == 1) {
-                $("#snacc").attr("data-content",'Invalid combination.');
+                $("#snacc").attr("data-content",'Incorrect email/username or password.');
             } else if(data.error == -1) {
                 $("#snacc").attr("data-content",'Please fill out all fields.');
             }

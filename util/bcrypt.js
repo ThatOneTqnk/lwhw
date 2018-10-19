@@ -11,6 +11,7 @@ if(config) {
 }
 
 var bcrypt = require('bcrypt');
+var validator = require('validator');
 const saltRounds = 10;
 const verCodeOpts = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 const User = require('../models/user.js')
@@ -60,6 +61,26 @@ exports.isVerified = function(incToken) {
     });
 }
 
+exports.loginUserMachine = function(candidate) {
+    return new Promise((resolve, reject) => {
+        let isEmail = validator.isEmail(candidate);
+        if(isEmail) {
+            User.findOne({email: candidate}, (err, resp) => {
+                if(resp) {
+                    resolve({
+                        providedUser: false,
+                        username: resp.username_lower
+                    });
+                }
+                if(err || !resp || (!err && !resp)) {
+                    reject({err: true});
+                }
+            });
+        } else {
+            resolve({providedUser: true});
+        }
+    });
+}
 
 // Also brings back email-verification status on trip
 exports.authenticate = function(incToken) {

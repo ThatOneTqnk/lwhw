@@ -4,16 +4,58 @@
         <% include ../partials/header %>
         <title>Dashboard</title>
         <link rel="stylesheet" href="/css/mainDash.css">
+        <style>
+            .board {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: center;
+            }
+            @media screen and (max-width: 767px) {
+                .board {
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    justify-content: center;
+                }
+                .jumbotron {
+                    padding: 3rem 3rem;
+                }
+            }
+
+            .board > div.card {
+                margin: 2%;
+            }
+        </style>
     </head>
     <body>
         <% include ../partials/navbar %>
         <div class="jumbotron">
             <div class="content">
-                <h5><b>Welcome, <%= username %></b></h5><br>
+                <h5><b>Welcome <%= username %></b></h5><br>
                 <p>You have no assigments to complete today!</p><br>
-                <a href="/dashboard/course/list">Curriculum Management</a>
-                <a href="/dashboard/hw/list">Assignment Tracker</a>
-                <a href="/dashboard/notes">Note Sorter</a>
+                <div class="board">
+                    <div class="card" style="width: 18rem;">    
+                        <div class="card-body">
+                        <h5 class="card-title">Curriculum Management</h5>
+                        <p class="card-text">Specify what courses you are taking and manage each of their individual properties.</p>
+                        <a href="/dashboard/course/list" class="btn btn-primary">GO</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">    
+                        <div class="card-body">
+                        <h5 class="card-title">Assignment Tracker</h5>
+                        <p class="card-text">Want to see what's due soon? Check here. All your homework assignments in one place.</p>
+                        <a href="/dashboard/hw/list" class="btn btn-primary">GO</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">    
+                            <div class="card-body">
+                            <h5 class="card-title">Procrastinator Machine</h5>
+                            <p class="card-text">Not really useful but maybe you like to procrastinate. Or maybe you are procrastinating using this tool right here. Beware.</p>
+                            <a href="/dashboard/lazy" class="btn btn-primary">GO</a>
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
         <% include ../partials/snackbar %>
